@@ -1,7 +1,7 @@
 /* Estilos generales */
 body {
   font-family: 'Montserrat', sans-serif;
-  background-color: #f8e71c; /* Fondo amarillo */
+  background-color: #ffd102; /* Fondo amarillo */
   padding: 20px;
   text-align: center;
 }
@@ -114,6 +114,6 @@ body {
 footer {
   text-align: center;
   margin-top: 50px;
-  font-size: 20px;
+  font-size: 10px;
   color: #666;
 }
