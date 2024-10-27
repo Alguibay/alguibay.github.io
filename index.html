@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Localizador de Comuna y Código Postal</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Enlace a Font Awesome para los iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+  <div class="container">
+    <!-- Botón para buscar comuna por GPS -->
+    <button id="gpsButton"><i class="fas fa-map-marker-alt"></i> COMUNA GPS</button>
+    <div id="gpsInfo">
+      <p>Comuna GPS: <span id="gpsComuna"></span></p>
+    </div>
+
+    <!-- Buscador de comuna -->
+    <input type="text" id="searchComuna" placeholder="Buscar Comuna...">
+    
+    <!-- Listbox de comunas -->
+    <select id="comunaSelect">
+      <option value="">Selecciona una comuna</option>
+    </select>
+
+    <!-- Cuadro de texto para código postal -->
+    <input type="text" id="codigoPostal" readonly placeholder="Código Postal">
+    
+    <!-- Mensaje debajo del código postal con el icono de base de datos -->
+    <p id="codigoPostalMessage"><i class="fas fa-database"></i> CÓDIGO POSTAL SIEBEL</p>
+  </div>
+
+  <footer>
+    Desarrollado por Ricardo Alguibay
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
