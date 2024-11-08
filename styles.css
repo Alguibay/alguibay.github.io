@@ -25,7 +25,7 @@ body {
 
 .container {
   width: 100%;
-  max-width: 432px; /* Reduced by 10% from 480px */
+  max-width: 432px;
 }
 
 .card {
@@ -93,12 +93,13 @@ body {
   background-color: #000;
   border: none;
   border-radius: 8px;
-  width: 48px;
+  width: 96px; /* Doubled from 48px */
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
+  padding: 0 1rem; /* Added padding for better spacing */
 }
 
 .search-button:hover {
