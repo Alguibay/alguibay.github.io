@@ -1,119 +1,201 @@
-/* Estilos generales */
+:root {
+  --primary-color: #ffd102;
+  --text-color: #1a1a1a;
+  --background-color: #ffffff;
+  --border-color: #e5e7eb;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  font-family: 'Montserrat', sans-serif;
-  background-color: #ffd102; /* Fondo amarillo */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: linear-gradient(135deg, var(--primary-color), #ffed4a);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 20px;
-  text-align: center;
+  color: var(--text-color);
 }
 
-/* Contenedor principal */
 .container {
+  width: 100%;
+  max-width: 480px;
+}
+
+.card {
+  background: var(--background-color);
+  border-radius: 16px;
+  box-shadow: 0 10px 25px var(--shadow-color);
+  padding: 2rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.title-container {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
-/* Botón de GPS */
-#gpsButton {
-  background-color: black;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  font-size: 20px;
-  margin-bottom: 30px;
-  border-radius: 8px; /* Bordes redondeados */
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3); /* Sombra suave */
-  transition: box-shadow 0.3s ease, transform 0.3s ease; /* Transición suave */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.title-icon {
+  font-size: 2rem;
+  color: var(--primary-color);
 }
 
-/* Efecto hover */
-#gpsButton:hover {
-  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.5); /* Sombra más intensa */
-  transform: translateY(-2px); /* Efecto de levantamiento al hacer hover */
+.header h1 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--text-color);
 }
 
-/* Estilo del icono en el botón */
-#gpsButton i {
-  margin-right: 8px;
-}
-
-/* Resultados de GPS */
-#gpsInfo {
-  margin-top: 20px;
-  font-size: 24px;
-  display: none; /* Inicialmente oculto */
-}
-
-#gpsInfo p {
-  margin: 10px 0;
-}
-
-#gpsComuna {
-  font-weight: bold;
-  font-size: 40px; /* Fuente más grande para destacar la comuna */
-}
-
-#gpsCalle, #gpsLatitud, #gpsLongitud {
-  font-weight: bold;
-}
-
-/* Input de búsqueda */
-#searchComuna {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 30px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 9px;
-}
-
-/* Listbox de comunas */
-#comunaSelect {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  margin-bottom: 30px;
-  border: 1px solid #ccc;
-  border-radius: 9px;
-}
-
-/* Cuadro de texto del código postal */
-#codigoPostal {
-  width: 200px;
-  background-color: black;
-  color: white;
-  padding: 15px;
-  border: none;
-  font-size: 20px;
-  text-align: center;
-  margin: 20px auto;
-  display: block;
-  border-radius: 90px;
-}
-
-/* Mensaje debajo del código postal con icono */
-#codigoPostalMessage {
-  font-size: 10px;
-  margin-top: 5px;
-  color: black;
-  text-align: center;
-}
-
-#codigoPostalMessage i {
-  margin-right: 5px; /* Espacio entre el icono y el texto */
-  color: black; /* Color del icono */
-  font-size: 12px; /* Tamaño del icono */
-}
-
-/* Estilos del footer */
-footer {
-  text-align: center;
-  margin-top: 50px;
-  font-size: 10px;
+.header p {
   color: #666;
+  font-size: 0.975rem;
+}
+
+.search-wrapper {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.search-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
+#comunaInput {
+  flex: 1;
+  padding: 1rem;
+  font-size: 1rem;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+#comunaInput:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(255, 209, 2, 0.2);
+}
+
+.search-button {
+  background-color: #000;
+  border: none;
+  border-radius: 8px;
+  width: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.search-button:hover {
+  background-color: #333;
+}
+
+.search-button i {
+  font-size: 1.25rem;
+  color: #fff;
+}
+
+.suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  margin-top: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+  z-index: 1000;
+  box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+.suggestion-item {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.suggestion-item:hover {
+  background-color: #f3f4f6;
+}
+
+.result-container {
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+.result-container.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.postal-code {
+  background: #000;
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.details {
+  display: grid;
+  gap: 1rem;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background: #f9fafb;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+.detail-icon {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  width: 24px;
+  text-align: center;
+}
+
+.detail-content {
+  flex: 1;
+}
+
+.label {
+  display: block;
+  font-size: 0.875rem;
+  color: #666;
+  margin-bottom: 0.25rem;
+}
+
+.value {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.hidden {
+  display: none;
 }
