@@ -10,13 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
   let comunasData = [];
   let currentSuggestionIndex = -1;
 
-  // Fetch data from CSV
   async function fetchComunasData() {
     try {
       const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vT3WGSdY5CUk5aZoQIcFig6Kx6aM6ljzhln-S5JUcrLnSFCIPTu-0uhhU0jKXJ50jSRBvMuc_XNnNQG/pub?gid=1841775016&single=true&output=csv');
       const text = await response.text();
-      
-      // Parse CSV
       const rows = text.split('\n').map(row => {
         const [comuna, codigoPostal, diaAtencion, semanaMes] = row.split(',');
         return {
@@ -26,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
           semana_mes: semanaMes.trim()
         };
       });
-
       comunasData = rows;
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -65,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
     comunaInput.value = comuna.nombre;
     suggestionsContainer.style.display = 'none';
     
-    // Update results
     codigoPostalElement.textContent = comuna.codigo_postal;
     diaAtencionElement.textContent = comuna.dia_semana || 'No disponible';
     semanaMesElement.textContent = comuna.semana_mes || 'No disponible';
@@ -83,6 +78,48 @@ document.addEventListener('DOMContentLoaded', () => {
       if (comuna) {
         selectComuna(comuna);
       }
+    }
+  }
+
+  function handleGeolocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(async (position) => {
+        const { latitude, longitude } = position.coords;
+        try {
+          const response = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`
+          );
+          const data = await response.json();
+          
+          if (data && data.address) {
+            const comunaName = data.address.city || 
+                             data.address.town || 
+                             data.address.village || 
+                             data.address.municipality || 
+                             data.address.suburb;
+            
+            if (comunaName) {
+              const comuna = comunasData.find(c => 
+                c.nombre.toLowerCase().includes(comunaName.toLowerCase())
+              );
+              
+              if (comuna) {
+                selectComuna(comuna);
+              } else {
+                alert('No se encontró información para esta ubicación');
+              }
+            }
+          }
+        } catch (error) {
+          console.error('Error en geolocalización:', error);
+          alert('Error al obtener la ubicación');
+        }
+      }, (error) => {
+        console.error('Error de geolocalización:', error);
+        alert('No se pudo obtener la ubicación');
+      });
+    } else {
+      alert('Tu navegador no soporta geolocalización');
     }
   }
 
@@ -115,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  searchButton.addEventListener('click', handleSearch);
+  searchButton.addEventListener('click', handleGeolocation);
 
   comunaInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter' && currentSuggestionIndex === -1) {
@@ -129,6 +166,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Initialize
   fetchComunasData();
 });
